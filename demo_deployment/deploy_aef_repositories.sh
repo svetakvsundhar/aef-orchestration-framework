@@ -131,6 +131,9 @@ if [ ! -f "aef-data-model/sample-data/terraform/tfplansampledata" ]; then
   github_dataform_repository="https://github.com/$github_user_name/$new_repo_name.git"
   escaped_github_dataform_repository=$(echo "$github_dataform_repository" | sed 's/-/\\-/g')
   sed -i.bak "s|<GITHUB_DATAFORM_REPOSITORY>|$escaped_github_dataform_repository|g" demo.tfvars
+  git add .
+  git commit -m "team variables setup"
+  git push origin main
   terraform init
   terraform plan -out=tfplansampledata -var-file="demo.tfvars"
   terraform apply -auto-approve tfplansampledata
